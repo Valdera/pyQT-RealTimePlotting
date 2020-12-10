@@ -24,6 +24,7 @@ flagTime = 0
 flagThread = True
 delayTime = 0.05
 
+
 def serial_ports():
     '''
     Get all the active port in the computer
@@ -52,7 +53,7 @@ def connect_port(port):
     '''
     Connect to the port
     '''
-    serialPort = serial.Serial(port = port, baudrate=115200, bytesize=8, timeout=2, stopbits=serial.STOPBITS_ONE)
+    serialPort = serial.Serial(port = port, baudrate=9600, bytesize=8, timeout=2, stopbits=serial.STOPBITS_ONE)
     return serialPort
 
 def initButton(self):
@@ -63,8 +64,8 @@ def initButton(self):
     self.btn_page_1.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_1))
     self.btn_page_2.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_2))
     self.btn_page_3.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_3))
-    self.startButton.pressed.connect(lambda: self.execute_thread())
-    self.stopButton.pressed.connect(lambda: self.stopThreading())
+    self.startButton1.pressed.connect(lambda: self.execute_thread())
+    self.stopButton1.pressed.connect(lambda: self.stopThreading())
 
 def initGraph(self):
     '''
@@ -84,6 +85,14 @@ def initGraph(self):
     self.graphWidget.setXRange(self.xRange, self.xRange+50, padding=0)
     self.graphWidget.showGrid(x=True, y=True)
 
+def filterInput(i):
+    stringArr = str(i)[2:].split(";")[:-1]
+    if (stringArr[0][:1] == "\\"):
+        stringArr[0] = 0
+    arr = [int(i) for i in stringArr]
+    return arr
+ 
+
 class MainWindow(QMainWindow,Ui_MainWindow):
     def __init__(self, *args, obj=None,**kwargs):
         '''
@@ -94,6 +103,12 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         self.threadpool = QThreadPool()
        
         initButton(self)
+
+        # Get all serial ports currently connected
+        self.serialPorts = serial_ports()
+        self.comboBoxArd.addItems(self.serialPorts)
+        self.currentPortName = self.serialPorts[0]
+        self.comboBoxArd.currentIndexChanged[str].connect(self.port_changed);
 
         # Graph Value
         self.x = [0]  # 100 time points
@@ -109,13 +124,15 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         graphLayout.addWidget(self.graphWidget)
 
         # Insert Layout
-        self.frameGraph.setLayout(graphLayout)
+        self.frameGraphMain.setLayout(graphLayout)
+        self.stopButton1.setHidden(True)
 
     def stopThreading(self):
         '''
         The function to stop the thread
         '''
         Worker.flagThread = False
+        self.currentPort.close()
 
     def execute_this_fn(self):
         '''
@@ -123,13 +140,20 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         '''
         global delayTime
         y = randint(0, 10)
+        line = self.currentPort.readline()
+        filtered = filterInput(line)
         time.sleep(delayTime)
-        return y 
+        print(filtered)
+
+        return filtered[0]
+            
 
     def thread_complete(self):
         '''
         This function run after thread finished
         '''
+        self.startButton1.setHidden(False)
+        self.stopButton1.setHidden(True)
         Worker.flagThread = True
         print("THREAD COMPLETE")
     
@@ -143,6 +167,9 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         '''
         Execute the thread
         '''
+        self.startButton1.setHidden(True)
+        self.stopButton1.setHidden(False)
+        self.currentPort = connect_port(self.currentPortName)
         worker = Worker(self.execute_this_fn) 
         worker.signals.result.connect(self.result_process)
         worker.signals.finished.connect(self.thread_complete)
@@ -154,6 +181,10 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         '''
         Worker.flagThread = False
         self.threadpool.clear()
+    
+    def port_changed(self, s):
+        self.currentPortName = s; 
+        print(self.currentPortName)
 
     def update_plot_graph(self, new_y):
         '''
@@ -178,7 +209,6 @@ class MainWindow(QMainWindow,Ui_MainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    print(serial_ports())
     window = MainWindow()
     window.show()
     sys.exit(app.exec_())

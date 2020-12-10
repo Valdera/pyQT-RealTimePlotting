@@ -16,7 +16,7 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1400, 800)
         MainWindow.setMinimumSize(QtCore.QSize(1400, 800))
-        MainWindow.setStyleSheet("background-color: rgb(45, 45, 45);")
+        MainWindow.setStyleSheet("background-color:  #FFFFF0;")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -36,7 +36,8 @@ class Ui_MainWindow(object):
         self.frame_toggle = QtWidgets.QFrame(self.Top_Bar)
         self.frame_toggle.setMinimumSize(QtCore.QSize(120, 0))
         self.frame_toggle.setMaximumSize(QtCore.QSize(70, 40))
-        self.frame_toggle.setStyleSheet("background-color: rgb(85, 170, 255);")
+        self.frame_toggle.setStyleSheet("background-color: #F59100;\n"
+"")
         self.frame_toggle.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_toggle.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_toggle.setObjectName("frame_toggle")
@@ -51,7 +52,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.Btn_Toggle.sizePolicy().hasHeightForWidth())
         self.Btn_Toggle.setSizePolicy(sizePolicy)
         self.Btn_Toggle.setMinimumSize(QtCore.QSize(120, 0))
-        self.Btn_Toggle.setStyleSheet("color: rgb(255, 255, 255);\n"
+        self.Btn_Toggle.setStyleSheet("color: #fff;\n"
 "border: 0px solid;")
         self.Btn_Toggle.setObjectName("Btn_Toggle")
         self.verticalLayout_2.addWidget(self.Btn_Toggle)
@@ -82,15 +83,20 @@ class Ui_MainWindow(object):
         self.page_1.setObjectName("page_1")
         self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.page_1)
         self.verticalLayout_7.setObjectName("verticalLayout_7")
-        self.groupBox = QtWidgets.QGroupBox(self.page_1)
+        self.stackedWidgetMain = QtWidgets.QStackedWidget(self.page_1)
+        self.stackedWidgetMain.setObjectName("stackedWidgetMain")
+        self.trackerPage = QtWidgets.QWidget()
+        self.trackerPage.setObjectName("trackerPage")
+        self.groupBox = QtWidgets.QGroupBox(self.trackerPage)
+        self.groupBox.setGeometry(QtCore.QRect(-20, 20, 1227, 691))
         self.groupBox.setAutoFillBackground(False)
         self.groupBox.setStyleSheet("border: none;\n"
 "")
         self.groupBox.setTitle("")
         self.groupBox.setObjectName("groupBox")
-        self.frameGraph = QtWidgets.QFrame(self.groupBox)
-        self.frameGraph.setGeometry(QtCore.QRect(520, 0, 671, 481))
-        self.frameGraph.setMinimumSize(QtCore.QSize(300, 300))
+        self.frameGraphMain = QtWidgets.QFrame(self.groupBox)
+        self.frameGraphMain.setGeometry(QtCore.QRect(520, 10, 671, 481))
+        self.frameGraphMain.setMinimumSize(QtCore.QSize(300, 300))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -119,39 +125,130 @@ class Ui_MainWindow(object):
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
-        self.frameGraph.setPalette(palette)
-        self.frameGraph.setAutoFillBackground(False)
-        self.frameGraph.setStyleSheet("border-radius: 20;\n"
-"background-color: rgb(255, 255, 255);")
-        self.frameGraph.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frameGraph.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frameGraph.setObjectName("frameGraph")
-        self.comboBox = QtWidgets.QComboBox(self.groupBox)
-        self.comboBox.setGeometry(QtCore.QRect(80, 440, 141, 31))
-        self.comboBox.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+        self.frameGraphMain.setPalette(palette)
+        self.frameGraphMain.setAutoFillBackground(False)
+        self.frameGraphMain.setStyleSheet("border-radius: 20;\n"
+"background-color: rgb(255, 255, 255);\n"
+"")
+        self.frameGraphMain.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frameGraphMain.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frameGraphMain.setObjectName("frameGraphMain")
+        self.frameGraphMini = QtWidgets.QFrame(self.groupBox)
+        self.frameGraphMini.setGeometry(QtCore.QRect(30, 10, 471, 391))
+        self.frameGraphMini.setStyleSheet("border-radius:20;\n"
+"background-color: rgb(255, 255, 255);\n"
+"")
+        self.frameGraphMini.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frameGraphMini.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frameGraphMini.setObjectName("frameGraphMini")
+        self.frame_4 = QtWidgets.QFrame(self.groupBox)
+        self.frame_4.setGeometry(QtCore.QRect(40, 540, 241, 151))
+        self.frame_4.setStyleSheet("border-radius: 20;\n"
+"background-color: #F59100;\n"
+"border: 0;\n"
+"")
+        self.frame_4.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_4.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_4.setObjectName("frame_4")
+        self.stopButton1 = QtWidgets.QPushButton(self.frame_4)
+        self.stopButton1.setGeometry(QtCore.QRect(80, 90, 93, 28))
+        self.stopButton1.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"border-radius: 10;\n"
+"")
+        self.stopButton1.setObjectName("stopButton1")
+        self.startButton1 = QtWidgets.QPushButton(self.frame_4)
+        self.startButton1.setGeometry(QtCore.QRect(80, 90, 93, 28))
+        self.startButton1.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"border-radius: 10;\n"
+"")
+        self.startButton1.setObjectName("startButton1")
+        self.comboBoxArd = QtWidgets.QComboBox(self.frame_4)
+        self.comboBoxArd.setGeometry(QtCore.QRect(50, 40, 141, 31))
+        self.comboBoxArd.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "font: 8pt \"Microsoft YaHei UI\";")
-        self.comboBox.setObjectName("comboBox")
-        self.comboBox.addItem("")
-        self.startButton = QtWidgets.QPushButton(self.groupBox)
-        self.startButton.setGeometry(QtCore.QRect(40, 500, 93, 28))
-        self.startButton.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+        self.comboBoxArd.setObjectName("comboBoxArd")
+        self.frame_5 = QtWidgets.QFrame(self.groupBox)
+        self.frame_5.setGeometry(QtCore.QRect(340, 540, 241, 151))
+        self.frame_5.setStyleSheet("border-radius: 20;\n"
+"background-color: #F59100;\n"
+"border: 0;\n"
+"")
+        self.frame_5.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_5.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_5.setObjectName("frame_5")
+        self.label_3 = QtWidgets.QLabel(self.frame_5)
+        self.label_3.setGeometry(QtCore.QRect(0, 40, 241, 20))
+        self.label_3.setStyleSheet("font-size: 20px;\n"
+"color: rgb(35, 35, 35);")
+        self.label_3.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_3.setObjectName("label_3")
+        self.label_4 = QtWidgets.QLabel(self.frame_5)
+        self.label_4.setGeometry(QtCore.QRect(0, 70, 241, 20))
+        self.label_4.setStyleSheet("font-size: 20px;\n"
+"color: rgb(35, 35, 35);")
+        self.label_4.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_4.setObjectName("label_4")
+        self.label_5 = QtWidgets.QLabel(self.frame_5)
+        self.label_5.setGeometry(QtCore.QRect(0, 100, 241, 20))
+        self.label_5.setStyleSheet("font-size: 20px;\n"
+"color: rgb(35, 35, 35);")
+        self.label_5.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_5.setObjectName("label_5")
+        self.frame_6 = QtWidgets.QFrame(self.groupBox)
+        self.frame_6.setGeometry(QtCore.QRect(640, 540, 241, 151))
+        self.frame_6.setStyleSheet("border-radius: 20;\n"
+"background-color: #F59100;\n"
+"border: 0;\n"
+"")
+        self.frame_6.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_6.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_6.setObjectName("frame_6")
+        self.frame_7 = QtWidgets.QFrame(self.groupBox)
+        self.frame_7.setGeometry(QtCore.QRect(940, 540, 241, 151))
+        self.frame_7.setStyleSheet("border-radius: 20;\n"
+"background-color: #F59100;\n"
+"border: 0;\n"
+"")
+        self.frame_7.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_7.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_7.setObjectName("frame_7")
+        self.label_6 = QtWidgets.QLabel(self.frame_7)
+        self.label_6.setGeometry(QtCore.QRect(0, 30, 241, 31))
+        self.label_6.setStyleSheet("font-size: 20px;\n"
+"color: rgb(35, 35, 35);")
+        self.label_6.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_6.setObjectName("label_6")
+        self.pushButton_2 = QtWidgets.QPushButton(self.frame_7)
+        self.pushButton_2.setGeometry(QtCore.QRect(50, 70, 141, 41))
+        self.pushButton_2.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "border-radius: 10;\n"
 "")
-        self.startButton.setObjectName("startButton")
-        self.stopButton = QtWidgets.QPushButton(self.groupBox)
-        self.stopButton.setGeometry(QtCore.QRect(150, 500, 93, 28))
-        self.stopButton.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"border-radius: 10;\n"
+        self.pushButton_2.setObjectName("pushButton_2")
+        self.pushButton = QtWidgets.QPushButton(self.groupBox)
+        self.pushButton.setGeometry(QtCore.QRect(300, 430, 70, 70))
+        self.pushButton.setMinimumSize(QtCore.QSize(70, 70))
+        self.pushButton.setMaximumSize(QtCore.QSize(70, 70))
+        self.pushButton.setStyleSheet("background-color: #fff;\n"
+"border-radius: 25;\n"
+"border: 1px solid #F59100;\n"
+"font-size: 40px;\n"
 "")
-        self.stopButton.setObjectName("stopButton")
-        self.frame = QtWidgets.QFrame(self.groupBox)
-        self.frame.setGeometry(QtCore.QRect(20, 10, 441, 321))
-        self.frame.setStyleSheet("border-radius:20;\n"
-"background-color: rgb(255, 255, 255);")
-        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame.setObjectName("frame")
-        self.verticalLayout_7.addWidget(self.groupBox)
+        self.pushButton.setObjectName("pushButton")
+        self.pushButton_3 = QtWidgets.QPushButton(self.groupBox)
+        self.pushButton_3.setGeometry(QtCore.QRect(160, 430, 70, 70))
+        self.pushButton_3.setMinimumSize(QtCore.QSize(70, 70))
+        self.pushButton_3.setMaximumSize(QtCore.QSize(70, 70))
+        self.pushButton_3.setStyleSheet("background-color: #fff;\n"
+"border-radius: 25;\n"
+"border: 1px solid #F59100;\n"
+"font-size: 40px;\n"
+"")
+        self.pushButton_3.setObjectName("pushButton_3")
+        self.stackedWidgetMain.addWidget(self.trackerPage)
+        self.loginPage = QtWidgets.QWidget()
+        self.loginPage.setObjectName("loginPage")
+        self.stackedWidgetMain.addWidget(self.loginPage)
+        self.verticalLayout_7.addWidget(self.stackedWidgetMain)
         self.stackedWidget.addWidget(self.page_1)
         self.page_2 = QtWidgets.QWidget()
         self.page_2.setObjectName("page_2")
@@ -207,7 +304,7 @@ class Ui_MainWindow(object):
 "    border: 0px solid;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: rgb(85, 170, 255);\n"
+"    background-color: #F59100;\n"
 "}")
         self.btn_page_1.setObjectName("btn_page_1")
         self.verticalLayout_4.addWidget(self.btn_page_1)
@@ -219,7 +316,7 @@ class Ui_MainWindow(object):
 "    border: 0px solid;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: rgb(85, 170, 255);\n"
+"    background-color: #F59100;\n"
 "}")
         self.btn_page_2.setObjectName("btn_page_2")
         self.verticalLayout_4.addWidget(self.btn_page_2)
@@ -231,7 +328,7 @@ class Ui_MainWindow(object):
 "    border: 0px solid;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: rgb(85, 170, 255);\n"
+"    background-color:#F59100;\n"
 "}")
         self.btn_page_3.setObjectName("btn_page_3")
         self.verticalLayout_4.addWidget(self.btn_page_3)
@@ -242,15 +339,22 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidgetMain.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.Btn_Toggle.setText(_translate("MainWindow", "TOGGLE"))
-        self.comboBox.setItemText(0, _translate("MainWindow", "Item Test"))
-        self.startButton.setText(_translate("MainWindow", "Start"))
-        self.stopButton.setText(_translate("MainWindow", "Stop"))
+        self.Btn_Toggle.setText(_translate("MainWindow", "SurfaceGating"))
+        self.stopButton1.setText(_translate("MainWindow", "Stop"))
+        self.startButton1.setText(_translate("MainWindow", "Start"))
+        self.label_3.setText(_translate("MainWindow", "Fauzan Valdera"))
+        self.label_4.setText(_translate("MainWindow", "18 Years Old"))
+        self.label_5.setText(_translate("MainWindow", "Male"))
+        self.label_6.setText(_translate("MainWindow", "Save Patient"))
+        self.pushButton_2.setText(_translate("MainWindow", "Save"))
+        self.pushButton.setText(_translate("MainWindow", ">"))
+        self.pushButton_3.setText(_translate("MainWindow", "<"))
         self.label_2.setText(_translate("MainWindow", "PAGE 2"))
         self.label.setText(_translate("MainWindow", "PAGE 3"))
         self.btn_page_1.setText(_translate("MainWindow", "Page 1"))

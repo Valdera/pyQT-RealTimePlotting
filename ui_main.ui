@@ -20,7 +20,7 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(45, 45, 45);</string>
+   <string notr="true">background-color:  #FFFFF0;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -87,7 +87,8 @@
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(85, 170, 255);</string>
+          <string notr="true">background-color: #F59100;
+</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -126,11 +127,11 @@
              </size>
             </property>
             <property name="styleSheet">
-             <string notr="true">color: rgb(255, 255, 255);
+             <string notr="true">color: #fff;
 border: 0px solid;</string>
             </property>
             <property name="text">
-             <string>TOGGLE</string>
+             <string>SurfaceGating</string>
             </property>
            </widget>
           </item>
@@ -194,232 +195,695 @@ border: 0px solid;</string>
             <widget class="QWidget" name="page_1">
              <layout class="QVBoxLayout" name="verticalLayout_7">
               <item>
-               <widget class="QGroupBox" name="groupBox">
-                <property name="autoFillBackground">
-                 <bool>false</bool>
+               <widget class="QStackedWidget" name="stackedWidgetMain">
+                <property name="currentIndex">
+                 <number>1</number>
                 </property>
-                <property name="styleSheet">
-                 <string notr="true">border: none;
-</string>
-                </property>
-                <property name="title">
-                 <string/>
-                </property>
-                <widget class="QFrame" name="frameGraph">
-                 <property name="geometry">
-                  <rect>
-                   <x>520</x>
-                   <y>0</y>
-                   <width>671</width>
-                   <height>481</height>
-                  </rect>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>300</width>
-                   <height>300</height>
-                  </size>
-                 </property>
-                 <property name="palette">
-                  <palette>
-                   <active>
-                    <colorrole role="Button">
-                     <brush brushstyle="SolidPattern">
-                      <color alpha="255">
-                       <red>255</red>
-                       <green>255</green>
-                       <blue>255</blue>
-                      </color>
-                     </brush>
-                    </colorrole>
-                    <colorrole role="Base">
-                     <brush brushstyle="SolidPattern">
-                      <color alpha="255">
-                       <red>255</red>
-                       <green>255</green>
-                       <blue>255</blue>
-                      </color>
-                     </brush>
-                    </colorrole>
-                    <colorrole role="Window">
-                     <brush brushstyle="SolidPattern">
-                      <color alpha="255">
-                       <red>255</red>
-                       <green>255</green>
-                       <blue>255</blue>
-                      </color>
-                     </brush>
-                    </colorrole>
-                   </active>
-                   <inactive>
-                    <colorrole role="Button">
-                     <brush brushstyle="SolidPattern">
-                      <color alpha="255">
-                       <red>255</red>
-                       <green>255</green>
-                       <blue>255</blue>
-                      </color>
-                     </brush>
-                    </colorrole>
-                    <colorrole role="Base">
-                     <brush brushstyle="SolidPattern">
-                      <color alpha="255">
-                       <red>255</red>
-                       <green>255</green>
-                       <blue>255</blue>
-                      </color>
-                     </brush>
-                    </colorrole>
-                    <colorrole role="Window">
-                     <brush brushstyle="SolidPattern">
-                      <color alpha="255">
-                       <red>255</red>
-                       <green>255</green>
-                       <blue>255</blue>
-                      </color>
-                     </brush>
-                    </colorrole>
-                   </inactive>
-                   <disabled>
-                    <colorrole role="Button">
-                     <brush brushstyle="SolidPattern">
-                      <color alpha="255">
-                       <red>255</red>
-                       <green>255</green>
-                       <blue>255</blue>
-                      </color>
-                     </brush>
-                    </colorrole>
-                    <colorrole role="Base">
-                     <brush brushstyle="SolidPattern">
-                      <color alpha="255">
-                       <red>255</red>
-                       <green>255</green>
-                       <blue>255</blue>
-                      </color>
-                     </brush>
-                    </colorrole>
-                    <colorrole role="Window">
-                     <brush brushstyle="SolidPattern">
-                      <color alpha="255">
-                       <red>255</red>
-                       <green>255</green>
-                       <blue>255</blue>
-                      </color>
-                     </brush>
-                    </colorrole>
-                   </disabled>
-                  </palette>
-                 </property>
-                 <property name="autoFillBackground">
-                  <bool>false</bool>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">border-radius: 20;
-background-color: rgb(255, 255, 255);</string>
-                 </property>
-                 <property name="frameShape">
-                  <enum>QFrame::StyledPanel</enum>
-                 </property>
-                 <property name="frameShadow">
-                  <enum>QFrame::Raised</enum>
-                 </property>
-                </widget>
-                <widget class="QComboBox" name="comboBox">
-                 <property name="geometry">
-                  <rect>
-                   <x>80</x>
-                   <y>440</y>
-                   <width>141</width>
-                   <height>31</height>
-                  </rect>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">background-color: rgb(255, 255, 255);
-font: 8pt &quot;Microsoft YaHei UI&quot;;</string>
-                 </property>
-                 <item>
-                  <property name="text">
-                   <string>Item Test</string>
+                <widget class="QWidget" name="trackerPage">
+                 <widget class="QGroupBox" name="groupBox">
+                  <property name="geometry">
+                   <rect>
+                    <x>-20</x>
+                    <y>20</y>
+                    <width>1227</width>
+                    <height>691</height>
+                   </rect>
                   </property>
-                 </item>
-                </widget>
-                <widget class="QFrame" name="frame">
-                 <property name="geometry">
-                  <rect>
-                   <x>20</x>
-                   <y>10</y>
-                   <width>471</width>
-                   <height>371</height>
-                  </rect>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">border-radius:20;
-background-color: rgb(255, 255, 255);</string>
-                 </property>
-                 <property name="frameShape">
-                  <enum>QFrame::StyledPanel</enum>
-                 </property>
-                 <property name="frameShadow">
-                  <enum>QFrame::Raised</enum>
-                 </property>
-                </widget>
-                <widget class="QFrame" name="frame_2">
-                 <property name="geometry">
-                  <rect>
-                   <x>50</x>
-                   <y>540</y>
-                   <width>241</width>
-                   <height>151</height>
-                  </rect>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">border-radius: 20;
-background-color: rgb(103, 255, 197);
+                  <property name="autoFillBackground">
+                   <bool>false</bool>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">border: none;
+</string>
+                  </property>
+                  <property name="title">
+                   <string/>
+                  </property>
+                  <widget class="QFrame" name="frameGraphMain">
+                   <property name="geometry">
+                    <rect>
+                     <x>520</x>
+                     <y>10</y>
+                     <width>671</width>
+                     <height>481</height>
+                    </rect>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>300</width>
+                     <height>300</height>
+                    </size>
+                   </property>
+                   <property name="palette">
+                    <palette>
+                     <active>
+                      <colorrole role="Button">
+                       <brush brushstyle="SolidPattern">
+                        <color alpha="255">
+                         <red>255</red>
+                         <green>255</green>
+                         <blue>255</blue>
+                        </color>
+                       </brush>
+                      </colorrole>
+                      <colorrole role="Base">
+                       <brush brushstyle="SolidPattern">
+                        <color alpha="255">
+                         <red>255</red>
+                         <green>255</green>
+                         <blue>255</blue>
+                        </color>
+                       </brush>
+                      </colorrole>
+                      <colorrole role="Window">
+                       <brush brushstyle="SolidPattern">
+                        <color alpha="255">
+                         <red>255</red>
+                         <green>255</green>
+                         <blue>255</blue>
+                        </color>
+                       </brush>
+                      </colorrole>
+                     </active>
+                     <inactive>
+                      <colorrole role="Button">
+                       <brush brushstyle="SolidPattern">
+                        <color alpha="255">
+                         <red>255</red>
+                         <green>255</green>
+                         <blue>255</blue>
+                        </color>
+                       </brush>
+                      </colorrole>
+                      <colorrole role="Base">
+                       <brush brushstyle="SolidPattern">
+                        <color alpha="255">
+                         <red>255</red>
+                         <green>255</green>
+                         <blue>255</blue>
+                        </color>
+                       </brush>
+                      </colorrole>
+                      <colorrole role="Window">
+                       <brush brushstyle="SolidPattern">
+                        <color alpha="255">
+                         <red>255</red>
+                         <green>255</green>
+                         <blue>255</blue>
+                        </color>
+                       </brush>
+                      </colorrole>
+                     </inactive>
+                     <disabled>
+                      <colorrole role="Button">
+                       <brush brushstyle="SolidPattern">
+                        <color alpha="255">
+                         <red>255</red>
+                         <green>255</green>
+                         <blue>255</blue>
+                        </color>
+                       </brush>
+                      </colorrole>
+                      <colorrole role="Base">
+                       <brush brushstyle="SolidPattern">
+                        <color alpha="255">
+                         <red>255</red>
+                         <green>255</green>
+                         <blue>255</blue>
+                        </color>
+                       </brush>
+                      </colorrole>
+                      <colorrole role="Window">
+                       <brush brushstyle="SolidPattern">
+                        <color alpha="255">
+                         <red>255</red>
+                         <green>255</green>
+                         <blue>255</blue>
+                        </color>
+                       </brush>
+                      </colorrole>
+                     </disabled>
+                    </palette>
+                   </property>
+                   <property name="autoFillBackground">
+                    <bool>false</bool>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">border-radius: 20;
+background-color: rgb(255, 255, 255);
+</string>
+                   </property>
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                  </widget>
+                  <widget class="QFrame" name="frameGraphMini">
+                   <property name="geometry">
+                    <rect>
+                     <x>30</x>
+                     <y>10</y>
+                     <width>471</width>
+                     <height>391</height>
+                    </rect>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">border-radius:20;
+background-color: rgb(255, 255, 255);
+</string>
+                   </property>
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                  </widget>
+                  <widget class="QFrame" name="frame_4">
+                   <property name="geometry">
+                    <rect>
+                     <x>40</x>
+                     <y>540</y>
+                     <width>241</width>
+                     <height>151</height>
+                    </rect>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">border-radius: 20;
+background-color: #F59100;
 border: 0;
 </string>
-                 </property>
-                 <property name="frameShape">
-                  <enum>QFrame::StyledPanel</enum>
-                 </property>
-                 <property name="frameShadow">
-                  <enum>QFrame::Raised</enum>
-                 </property>
-                 <widget class="QPushButton" name="stopButton">
-                  <property name="geometry">
-                   <rect>
-                    <x>130</x>
-                    <y>100</y>
-                    <width>93</width>
-                    <height>28</height>
-                   </rect>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">background-color: rgb(255, 255, 255);
+                   </property>
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                   <widget class="QPushButton" name="stopButton1">
+                    <property name="geometry">
+                     <rect>
+                      <x>80</x>
+                      <y>90</y>
+                      <width>93</width>
+                      <height>28</height>
+                     </rect>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 10;
 </string>
-                  </property>
-                  <property name="text">
-                   <string>Stop</string>
-                  </property>
+                    </property>
+                    <property name="text">
+                     <string>Stop</string>
+                    </property>
+                   </widget>
+                   <widget class="QPushButton" name="startButton1">
+                    <property name="geometry">
+                     <rect>
+                      <x>80</x>
+                      <y>90</y>
+                      <width>93</width>
+                      <height>28</height>
+                     </rect>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 10;
+</string>
+                    </property>
+                    <property name="text">
+                     <string>Start</string>
+                    </property>
+                   </widget>
+                   <widget class="QComboBox" name="comboBoxArd">
+                    <property name="geometry">
+                     <rect>
+                      <x>50</x>
+                      <y>40</y>
+                      <width>141</width>
+                      <height>31</height>
+                     </rect>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: rgb(255, 255, 255);
+font: 8pt &quot;Microsoft YaHei UI&quot;;</string>
+                    </property>
+                   </widget>
+                  </widget>
+                  <widget class="QFrame" name="frame_5">
+                   <property name="geometry">
+                    <rect>
+                     <x>340</x>
+                     <y>540</y>
+                     <width>241</width>
+                     <height>151</height>
+                    </rect>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">border-radius: 20;
+background-color: #F59100;
+border: 0;
+</string>
+                   </property>
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                   <widget class="QLabel" name="label_3">
+                    <property name="geometry">
+                     <rect>
+                      <x>0</x>
+                      <y>40</y>
+                      <width>241</width>
+                      <height>20</height>
+                     </rect>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">font-size: 20px;
+color: rgb(35, 35, 35);</string>
+                    </property>
+                    <property name="text">
+                     <string>Fauzan Valdera</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                   <widget class="QLabel" name="label_4">
+                    <property name="geometry">
+                     <rect>
+                      <x>0</x>
+                      <y>70</y>
+                      <width>241</width>
+                      <height>20</height>
+                     </rect>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">font-size: 20px;
+color: rgb(35, 35, 35);</string>
+                    </property>
+                    <property name="text">
+                     <string>18 Years Old</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                   <widget class="QLabel" name="label_5">
+                    <property name="geometry">
+                     <rect>
+                      <x>0</x>
+                      <y>100</y>
+                      <width>241</width>
+                      <height>20</height>
+                     </rect>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">font-size: 20px;
+color: rgb(35, 35, 35);</string>
+                    </property>
+                    <property name="text">
+                     <string>Male</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                  </widget>
+                  <widget class="QFrame" name="frame_6">
+                   <property name="geometry">
+                    <rect>
+                     <x>640</x>
+                     <y>540</y>
+                     <width>241</width>
+                     <height>151</height>
+                    </rect>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">border-radius: 20;
+background-color: #F59100;
+border: 0;
+</string>
+                   </property>
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                  </widget>
+                  <widget class="QFrame" name="frame_7">
+                   <property name="geometry">
+                    <rect>
+                     <x>940</x>
+                     <y>540</y>
+                     <width>241</width>
+                     <height>151</height>
+                    </rect>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">border-radius: 20;
+background-color: #F59100;
+border: 0;
+</string>
+                   </property>
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                   <widget class="QLabel" name="label_6">
+                    <property name="geometry">
+                     <rect>
+                      <x>0</x>
+                      <y>30</y>
+                      <width>241</width>
+                      <height>31</height>
+                     </rect>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">font-size: 20px;
+color: rgb(35, 35, 35);</string>
+                    </property>
+                    <property name="text">
+                     <string>Save Patient</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                   <widget class="QPushButton" name="pushButton_2">
+                    <property name="geometry">
+                     <rect>
+                      <x>50</x>
+                      <y>70</y>
+                      <width>141</width>
+                      <height>41</height>
+                     </rect>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 10;
+</string>
+                    </property>
+                    <property name="text">
+                     <string>Save</string>
+                    </property>
+                   </widget>
+                  </widget>
+                  <widget class="QPushButton" name="pushButton">
+                   <property name="geometry">
+                    <rect>
+                     <x>300</x>
+                     <y>430</y>
+                     <width>70</width>
+                     <height>70</height>
+                    </rect>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>70</width>
+                     <height>70</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>70</width>
+                     <height>70</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">background-color: #fff;
+border-radius: 25;
+border: 1px solid #F59100;
+font-size: 40px;
+</string>
+                   </property>
+                   <property name="text">
+                    <string>&gt;</string>
+                   </property>
+                  </widget>
+                  <widget class="QPushButton" name="pushButton_3">
+                   <property name="geometry">
+                    <rect>
+                     <x>160</x>
+                     <y>430</y>
+                     <width>70</width>
+                     <height>70</height>
+                    </rect>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>70</width>
+                     <height>70</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>70</width>
+                     <height>70</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">background-color: #fff;
+border-radius: 25;
+border: 1px solid #F59100;
+font-size: 40px;
+</string>
+                   </property>
+                   <property name="text">
+                    <string>&lt;</string>
+                   </property>
+                  </widget>
                  </widget>
-                 <widget class="QPushButton" name="startButton">
+                </widget>
+                <widget class="QWidget" name="createPage">
+                 <widget class="QGroupBox" name="groupBox_3">
                   <property name="geometry">
                    <rect>
-                    <x>20</x>
-                    <y>100</y>
-                    <width>93</width>
-                    <height>28</height>
+                    <x>-1</x>
+                    <y>-1</y>
+                    <width>1221</width>
+                    <height>711</height>
                    </rect>
                   </property>
-                  <property name="styleSheet">
-                   <string notr="true">background-color: rgb(255, 255, 255);
-border-radius: 10;
+                  <property name="title">
+                   <string>GroupBox</string>
+                  </property>
+                  <widget class="QFrame" name="frame_3">
+                   <property name="geometry">
+                    <rect>
+                     <x>350</x>
+                     <y>50</y>
+                     <width>491</width>
+                     <height>611</height>
+                    </rect>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">background-color: orange;
+border-radius: 20px;</string>
+                   </property>
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                   <widget class="QLabel" name="label_2">
+                    <property name="geometry">
+                     <rect>
+                      <x>10</x>
+                      <y>30</y>
+                      <width>471</width>
+                      <height>51</height>
+                     </rect>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">font-size: 40px; color: white;</string>
+                    </property>
+                    <property name="text">
+                     <string>CREATE PATIENT</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                   <widget class="QLineEdit" name="lineEdit">
+                    <property name="geometry">
+                     <rect>
+                      <x>80</x>
+                      <y>150</y>
+                      <width>341</width>
+                      <height>41</height>
+                     </rect>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: #fff;
+padding: 5px 10px;
 </string>
-                  </property>
-                  <property name="text">
-                   <string>Start</string>
-                  </property>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
+                   <widget class="QLabel" name="label_7">
+                    <property name="geometry">
+                     <rect>
+                      <x>10</x>
+                      <y>110</y>
+                      <width>471</width>
+                      <height>31</height>
+                     </rect>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">font-size: 22px;</string>
+                    </property>
+                    <property name="text">
+                     <string>Patient ID</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                   <widget class="QLabel" name="label_8">
+                    <property name="geometry">
+                     <rect>
+                      <x>10</x>
+                      <y>210</y>
+                      <width>471</width>
+                      <height>31</height>
+                     </rect>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">font-size: 22px;</string>
+                    </property>
+                    <property name="text">
+                     <string>Patient Name</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                   <widget class="QLineEdit" name="lineEdit_2">
+                    <property name="geometry">
+                     <rect>
+                      <x>80</x>
+                      <y>250</y>
+                      <width>341</width>
+                      <height>41</height>
+                     </rect>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: #fff;
+padding: 5px 10px;
+</string>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
+                   <widget class="QLabel" name="label_9">
+                    <property name="geometry">
+                     <rect>
+                      <x>10</x>
+                      <y>310</y>
+                      <width>471</width>
+                      <height>31</height>
+                     </rect>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">font-size: 22px;</string>
+                    </property>
+                    <property name="text">
+                     <string>Patient Age</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                   <widget class="QLineEdit" name="lineEdit_3">
+                    <property name="geometry">
+                     <rect>
+                      <x>80</x>
+                      <y>350</y>
+                      <width>341</width>
+                      <height>41</height>
+                     </rect>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: #fff;
+padding: 5px 10px;
+</string>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
+                   <widget class="QLabel" name="label_10">
+                    <property name="geometry">
+                     <rect>
+                      <x>10</x>
+                      <y>410</y>
+                      <width>471</width>
+                      <height>31</height>
+                     </rect>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">font-size: 22px;</string>
+                    </property>
+                    <property name="text">
+                     <string>Patient Gender</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                   <widget class="QComboBox" name="comboBox_2">
+                    <property name="geometry">
+                     <rect>
+                      <x>170</x>
+                      <y>450</y>
+                      <width>161</width>
+                      <height>31</height>
+                     </rect>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: white;</string>
+                    </property>
+                    <item>
+                     <property name="text">
+                      <string>Male</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>Female</string>
+                     </property>
+                    </item>
+                   </widget>
+                   <widget class="QPushButton" name="pushButton_4">
+                    <property name="geometry">
+                     <rect>
+                      <x>150</x>
+                      <y>530</y>
+                      <width>201</width>
+                      <height>41</height>
+                     </rect>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: white</string>
+                    </property>
+                    <property name="text">
+                     <string>Create</string>
+                    </property>
+                   </widget>
+                  </widget>
                  </widget>
                 </widget>
                </widget>
@@ -429,20 +893,9 @@ border-radius: 10;
             <widget class="QWidget" name="page_2">
              <layout class="QVBoxLayout" name="verticalLayout_6">
               <item>
-               <widget class="QLabel" name="label_2">
-                <property name="font">
-                 <font>
-                  <pointsize>40</pointsize>
-                 </font>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">color: #FFF;</string>
-                </property>
-                <property name="text">
-                 <string>PAGE 2</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
+               <widget class="QGroupBox" name="groupBox_2">
+                <property name="title">
+                 <string>GroupBox</string>
                 </property>
                </widget>
               </item>
@@ -550,7 +1003,7 @@ border-radius: 10;
 	border: 0px solid;
 }
 QPushButton:hover {
-	background-color: rgb(85, 170, 255);
+	background-color: #F59100;
 }</string>
                </property>
                <property name="text">
@@ -573,7 +1026,7 @@ QPushButton:hover {
 	border: 0px solid;
 }
 QPushButton:hover {
-	background-color: rgb(85, 170, 255);
+	background-color: #F59100;
 }</string>
                </property>
                <property name="text">
@@ -596,7 +1049,7 @@ QPushButton:hover {
 	border: 0px solid;
 }
 QPushButton:hover {
-	background-color: rgb(85, 170, 255);
+	background-color:#F59100;
 }</string>
                </property>
                <property name="text">
