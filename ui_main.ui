@@ -197,7 +197,7 @@ border: 0px solid;</string>
               <item>
                <widget class="QStackedWidget" name="stackedWidgetMain">
                 <property name="currentIndex">
-                 <number>1</number>
+                 <number>0</number>
                 </property>
                 <widget class="QWidget" name="trackerPage">
                  <widget class="QGroupBox" name="groupBox">
@@ -597,7 +597,7 @@ border-radius: 10;
                     </property>
                    </widget>
                   </widget>
-                  <widget class="QPushButton" name="pushButton">
+                  <widget class="QPushButton" name="graphRightButton">
                    <property name="geometry">
                     <rect>
                      <x>300</x>
@@ -629,7 +629,7 @@ font-size: 40px;
                     <string>&gt;</string>
                    </property>
                   </widget>
-                  <widget class="QPushButton" name="pushButton_3">
+                  <widget class="QPushButton" name="graphLeftButton">
                    <property name="geometry">
                     <rect>
                      <x>160</x>
@@ -673,8 +673,12 @@ font-size: 40px;
                     <height>711</height>
                    </rect>
                   </property>
+                  <property name="styleSheet">
+                   <string notr="true">border: none;
+</string>
+                  </property>
                   <property name="title">
-                   <string>GroupBox</string>
+                   <string/>
                   </property>
                   <widget class="QFrame" name="frame_3">
                    <property name="geometry">
@@ -714,7 +718,7 @@ border-radius: 20px;</string>
                      <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
-                   <widget class="QLineEdit" name="lineEdit">
+                   <widget class="QLineEdit" name="createIdEdit">
                     <property name="geometry">
                      <rect>
                       <x>80</x>
@@ -770,7 +774,7 @@ padding: 5px 10px;
                      <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
-                   <widget class="QLineEdit" name="lineEdit_2">
+                   <widget class="QLineEdit" name="createNameEdit">
                     <property name="geometry">
                      <rect>
                       <x>80</x>
@@ -807,7 +811,7 @@ padding: 5px 10px;
                      <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
-                   <widget class="QLineEdit" name="lineEdit_3">
+                   <widget class="QLineEdit" name="createAgeEdit">
                     <property name="geometry">
                      <rect>
                       <x>80</x>
@@ -844,7 +848,7 @@ padding: 5px 10px;
                      <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
-                   <widget class="QComboBox" name="comboBox_2">
+                   <widget class="QComboBox" name="comboGenderBox">
                     <property name="geometry">
                      <rect>
                       <x>170</x>
@@ -867,7 +871,7 @@ padding: 5px 10px;
                      </property>
                     </item>
                    </widget>
-                   <widget class="QPushButton" name="pushButton_4">
+                   <widget class="QPushButton" name="createButton">
                     <property name="geometry">
                      <rect>
                       <x>150</x>
