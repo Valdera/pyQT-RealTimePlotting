@@ -8,21 +8,19 @@ from serial import Serial
 import serial
 import platform
 import time
-from random import randint
 from ui_main import Ui_MainWindow
-from ui_functions import *
 from worker import Worker
-from canvas import MplCanvas
 import numpy as np
 
 flagTime = 0
+flagHiddenGraph = False
 flagThread = True
 delayTime = 0.05
 
-# TODO :
-# -- CHANGE ARRAY TO NUMPY ARRAY
-# -- IMPLEMENT HIDDEN LINE
-# -- FIX HEIGHT ADJUST
+# TODO : 
+# DONE CHANGE ARRAY TO NUMPY ARRAY 
+# DONE IMPLEMENT HIDDEN LINE
+# DONE FIX HEIGHT ADJUST
 # -- SET RANGE IN MINI GRAPH
 # -- MAKE LOGIN UI
 # -- MAKE DATA TRANSFORMATION ARCHITECTURE
@@ -65,7 +63,6 @@ def initButton(self):
     '''
     Init all the button required
     '''
-    # self.Btn_Toggle.clicked.connect(lambda: UIFunctions.toggleMenu(self, 250, True))
     self.btn_page_1.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_1))
     self.btn_page_2.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_2))
     self.btn_page_3.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_3))
@@ -90,10 +87,11 @@ def initGraph(self):
     self.graphWidget.setLabel("left", "Range (mm)", **styles)
     self.graphWidget.setLabel("bottom", "Seconds (s)", **styles)
     pen = pg.mkPen(color='#F59100', width=2)
+    hiddenpen = pg.mkPen(color='#EA020B', width=2)
     
     # Set the data for the graph
     self.data_line =  self.graphWidget.plot(self.x, self.y, pen=pen)
-    # self.hidden_line = self.graphWidget.plot(self.x, self.)
+    self.hidden_line = self.graphWidget.plot(self.x, self.hidden, connect="finite", pen=hiddenpen)
     
     # Graph Range
     self.graphWidget.setXRange(self.xRange, self.xRange+50, padding=0)
@@ -151,21 +149,24 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         self.comboBoxArd.currentIndexChanged[str].connect(self.port_changed);
 
         # Main Graph Value
-        self.x = [0]  
-        self.y = [0]  
-        self.seconds = [0]
+        self.x = np.array([0])  
+        self.y = np.array([0])  
+        self.hidden_x = np.array([0])
+        self.hidden = np.array([0])
+        self.seconds = np.array([0])
         self.xRange = 0
 
         # Mini Graph Value
-        self.sensorA = [0]
-        self.sensorB = [0]
-        self.sensorC = [0]
-        self.sensorD = [0]
-        self.sensorE = [0]
-        self.sensorF = [0]
-        self.sensorG = [0]
-        self.sensorH = [0]
-        self.sensorI = [0]
+        self.sensorA = np.array([0])
+        self.sensorB = np.array([0])
+        self.sensorC = np.array([0])
+        self.sensorD = np.array([0])
+        self.sensorE = np.array([0])
+        self.sensorF = np.array([0])
+        self.sensorG = np.array([0])
+        self.sensorH = np.array([0])
+        self.sensorI = np.array([0])
+        
 
         self.currentMiniY = 'A'
 
@@ -195,14 +196,11 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         The function to be executed when the thread runs
         '''
         global delayTime
-        y = randint(0, 10)
         line = self.currentPort.readline()
         filtered = filterInput(line)
         time.sleep(delayTime)
-        print(filtered)
-
+        # print(filtered)
         return filtered
-            
 
     def thread_complete(self):
         '''
@@ -239,51 +237,77 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         self.threadpool.clear()
     
     def port_changed(self, s):
-        self.currentPortName = s; 
-        print(self.currentPortName)
+        '''
+        Trigger when combo arduino box changed
+        '''
+        self.currentPortName = s
     
     def changePage(self, index):
+        '''
+        Navigate between main pages
+        '''
         self.stackedWidgetMain.setCurrentIndex(index)
 
     def update_plot_graph(self, new_y):
         '''
         Update Graph Data
         '''
-        global flagTime, delayTime
+        global flagTime, flagHiddenGraph, delayTime
         try:
             if(flagTime > 1/delayTime):
                 flagTime = 0
-                self.seconds.append(self.seconds[-1]+1)
+                self.seconds = np.append(self.seconds, self.seconds[-1]+1)
             else:
                 flagTime += 1
+
+            self.x = np.append(self.x, self.x[-1] + delayTime)  
+            self.y = np.append(self.y, new_y[9])  
             
+            if new_y[10] == 1:
+                if flagHiddenGraph == False:
+                    self.hidden = np.array([])
+                    self.hidden_x = np.array([])
+                flagHiddenGraph = True
+                
+                self.hidden = np.append(self.hidden, new_y[9])
+                self.hidden_x = np.append(self.hidden_x, self.x[-1])
+                
+            else:
+                if flagHiddenGraph == True:
+                    flagHiddenGraph = False
+
             if(len(self.seconds) > 30):
                 self.xRange += delayTime
-                print(self.xRange)
-                # self.graphWidget.setYRange(30, 40, padding=0)
-                self.graphWidget.setXRange(self.xRange, self.xRange+50, padding=0)
-
-            self.x.append(self.x[-1] + delayTime)  # Add a new value 1 higher than the last.
-            self.y.append(new_y[9])  # Add a new random value.
+                self.graphWidget.setXRange(self.xRange, self.xRange+30, padding=0)
             
-            self.sensorA.append(new_y[0])
-            self.sensorB.append(new_y[1])
-            self.sensorC.append(new_y[2])
-            self.sensorD.append(new_y[3])
-            self.sensorE.append(new_y[4])
-            self.sensorF.append(new_y[5])
-            self.sensorG.append(new_y[6])
-            self.sensorH.append(new_y[7])
-            self.sensorI.append(new_y[8]+10)
-
+            yRange = self.y[-(30//delayTime):-1] if len(self.y) > 30//delayTime else self.y[:-1]
+            upperRange = np.amax(yRange) + 10
+            lowerRange = np.amin(yRange) - 10 if np.amin(yRange) - 10 < 0 else 0
+            self.graphWidget.setYRange(lowerRange, upperRange, padding=0)
+            
+            print(self.hidden)
+            
+            self.sensorA = np.append(self.sensorA, new_y[0])
+            self.sensorB = np.append(self.sensorB, new_y[1])
+            self.sensorC = np.append(self.sensorC, new_y[2])
+            self.sensorD = np.append(self.sensorD, new_y[3])
+            self.sensorE = np.append(self.sensorE, new_y[4])
+            self.sensorF = np.append(self.sensorF, new_y[5])
+            self.sensorG = np.append(self.sensorG, new_y[6])
+            self.sensorH = np.append(self.sensorH, new_y[7])
+            self.sensorI = np.append(self.sensorI, new_y[8])
+            
             self.data_line.setData(self.x, self.y)
-            self.data_line.setData(self.x, self.sensorI)
+            self.hidden_line.setData(self.hidden_x, self.hidden, connect="finite")
             self.setCurrentMiniData(self.currentMiniY)
-        
+
         except:
             self.stopThreading()
 
     def setCurrentMiniData(self, index):
+        '''
+        Set current mini data
+        '''
         if index == 'A':
             self.mini_data_line.setData(self.x, self.sensorA)
         elif index == 'B':
@@ -306,6 +330,9 @@ class MainWindow(QMainWindow,Ui_MainWindow):
             return
     
     def switchMiniGraph(self, arrow):
+        '''
+        Switch between mini graph
+        '''
         sensorPositions = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
         currentIndex = sensorPositions.index(self.currentMiniY)
         if arrow == 'L':
