@@ -21,11 +21,15 @@ delayTime = 0.05
 # DONE CHANGE ARRAY TO NUMPY ARRAY 
 # DONE IMPLEMENT HIDDEN LINE
 # DONE FIX HEIGHT ADJUST
-# -- SET RANGE IN MINI GRAPH
-# -- MAKE LOGIN UI
-# -- MAKE DATA TRANSFORMATION ARCHITECTURE
+# DONE REGION OF INTEREST
+# DONE SET RANGE IN MINI GRAPH
+# DONE MAKE LOGIN UI
+# DONE MAKE DATA TRANSFORMATION ARCHITECTURE
 # -- CONFIGURE WITH FIREBASE
 # -- CRUD OPERATIONS
+# -- DATABASE PAGE
+# -- SETTING PAGE
+# -- ERROR HANDLING
 
 
 def serial_ports():
@@ -68,9 +72,18 @@ def initButton(self):
     self.btn_page_3.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_3))
     self.startButton1.pressed.connect(lambda: self.execute_thread())
     self.stopButton1.pressed.connect(lambda: self.stopThreading())
-    self.createButton.pressed.connect(lambda: self.changePage(0))
+    # self.createButton.pressed.connect(lambda: self.changePage(0))
     self.graphRightButton.pressed.connect(lambda: self.switchMiniGraph('R'))
     self.graphLeftButton.pressed.connect(lambda: self.switchMiniGraph('L'))
+    self.loginButton.pressed.connect(lambda: self.login())
+    self.toCreateButton.pressed.connect(lambda: self.changePage(2))
+    self.createButton.pressed.connect(lambda: self.create())
+    self.createAgeEdit.textEdited.connect(self.create_age)
+    self.createIdEdit.textEdited.connect(self.create_id)
+    self.createNameEdit.textEdited.connect(self.create_name)
+    self.loginIdEdit.textEdited.connect(self.login_id)
+    self.comboGenderBox.currentIndexChanged[str].connect(self.create_gender)
+    self.saveButton.pressed.connect(lambda: self.save())
 
 
 def initGraph(self):
@@ -79,6 +92,11 @@ def initGraph(self):
     '''
     # Plot the graph
     self.graphWidget = pg.PlotWidget()
+    self.region = pg.LinearRegionItem([0,0], movable=False, orientation='horizontal')
+    self.region.setZValue(-10)
+    self.graphWidget.addItem(self.region)
+    # self.graphWidget.ROI([20, 20], [20, 20], pen=(0,9))
+
     
     # GUI Configuration
     self.graphWidget.setBackground('w')
@@ -138,6 +156,24 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         self.threadpool = QThreadPool()
         self.stackedWidgetMain.setCurrentIndex(1)
        
+        # Patient Variables
+        self.createPatientName = ""
+        self.createPatientAge = 0
+        self.createPatientId = ""
+        self.createPatientGender = "Male"
+
+        self.loginPatientId = ""
+
+        # Patient Variables
+        self.currentPatientName = ""
+        self.currentPatientAge = 0
+        self.currentPatientId = ""
+        self.currentPatientGender = ""
+
+        self.currentMax = 0
+        self.currentMin = 0
+        
+
         initButton(self)
         # Make the stop button invisible
         self.stopButton1.setHidden(True)
@@ -166,8 +202,6 @@ class MainWindow(QMainWindow,Ui_MainWindow):
         self.sensorG = np.array([0])
         self.sensorH = np.array([0])
         self.sensorI = np.array([0])
-        
-
         self.currentMiniY = 'A'
 
         # Graph init
@@ -245,6 +279,9 @@ class MainWindow(QMainWindow,Ui_MainWindow):
     def changePage(self, index):
         '''
         Navigate between main pages
+        0 = Tracker Page
+        1 = Login Page
+        2 = Create Page
         '''
         self.stackedWidgetMain.setCurrentIndex(index)
 
@@ -264,6 +301,12 @@ class MainWindow(QMainWindow,Ui_MainWindow):
             self.y = np.append(self.y, new_y[9])  
             
             if new_y[10] == 1:
+                if new_y[9] > self.currentMax:
+                    self.currentMax = new_y[9]
+                
+                if new_y[9] < self.currentMin:
+                    self.currentMin = new_y[9]
+
                 if flagHiddenGraph == False:
                     self.hidden = np.array([])
                     self.hidden_x = np.array([])
@@ -271,7 +314,6 @@ class MainWindow(QMainWindow,Ui_MainWindow):
                 
                 self.hidden = np.append(self.hidden, new_y[9])
                 self.hidden_x = np.append(self.hidden_x, self.x[-1])
-                
             else:
                 if flagHiddenGraph == True:
                     flagHiddenGraph = False
@@ -284,9 +326,7 @@ class MainWindow(QMainWindow,Ui_MainWindow):
             upperRange = np.amax(yRange) + 10
             lowerRange = np.amin(yRange) - 10 if np.amin(yRange) - 10 < 0 else 0
             self.graphWidget.setYRange(lowerRange, upperRange, padding=0)
-            
-            print(self.hidden)
-            
+                        
             self.sensorA = np.append(self.sensorA, new_y[0])
             self.sensorB = np.append(self.sensorB, new_y[1])
             self.sensorC = np.append(self.sensorC, new_y[2])
@@ -344,6 +384,41 @@ class MainWindow(QMainWindow,Ui_MainWindow):
                 self.currentMiniY = sensorPositions[currentIndex + 1]
 
         self.miniGraphWidget.setTitle('Graph for sensor {}'.format(self.currentMiniY), color="#F59100", size="10pt")
+    
+    def login(self):
+        print(self.loginPatientId)
+
+    def save(self):
+        self.region.setRegion([self.currentMin, self.currentMax])
+        self.stopThreading()
+        print(self.currentMax)
+        print(self.currentMin)
+
+    def create(self): 
+        patient = {
+            "name": self.createPatientName,
+            "age": self.createPatientAge,
+            "id": self.createPatientId,
+            "gender": self.createPatientGender
+        }
+        print(patient)
+        self.changePage(0)
+
+    def create_id(self, s):
+        self.createPatientId = s
+
+    def create_name(self, s):
+        self.createPatientName = s
+
+    def create_age(self, s):
+        self.createPatientAge = s
+
+    def create_gender(self, s):
+        self.createPatientGender = s
+    
+    def login_id(self, s):
+        self.loginPatientId = s
+        
 
 
 if __name__ == "__main__":

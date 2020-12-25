@@ -578,7 +578,7 @@ color: rgb(35, 35, 35);</string>
                      <set>Qt::AlignCenter</set>
                     </property>
                    </widget>
-                   <widget class="QPushButton" name="pushButton_2">
+                   <widget class="QPushButton" name="saveButton">
                     <property name="geometry">
                      <rect>
                       <x>50</x>
@@ -660,6 +660,133 @@ font-size: 40px;
                    <property name="text">
                     <string>&lt;</string>
                    </property>
+                  </widget>
+                 </widget>
+                </widget>
+                <widget class="QWidget" name="loginPage">
+                 <widget class="QGroupBox" name="groupBox_4">
+                  <property name="geometry">
+                   <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>1231</width>
+                    <height>721</height>
+                   </rect>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">border: none;
+</string>
+                  </property>
+                  <property name="title">
+                   <string>GroupBox</string>
+                  </property>
+                  <widget class="QFrame" name="frame_8">
+                   <property name="geometry">
+                    <rect>
+                     <x>440</x>
+                     <y>140</y>
+                     <width>401</width>
+                     <height>341</height>
+                    </rect>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">background-color: orange;
+border-radius: 20px;</string>
+                   </property>
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                   <widget class="QLabel" name="label_11">
+                    <property name="geometry">
+                     <rect>
+                      <x>-40</x>
+                      <y>30</y>
+                      <width>471</width>
+                      <height>51</height>
+                     </rect>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">font-size: 40px; color: white;</string>
+                    </property>
+                    <property name="text">
+                     <string>LOGIN PATIENT</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                   <widget class="QLineEdit" name="loginIdEdit">
+                    <property name="geometry">
+                     <rect>
+                      <x>30</x>
+                      <y>140</y>
+                      <width>341</width>
+                      <height>41</height>
+                     </rect>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: #fff;
+padding: 5px 10px;
+</string>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
+                   <widget class="QLabel" name="label_12">
+                    <property name="geometry">
+                     <rect>
+                      <x>-40</x>
+                      <y>100</y>
+                      <width>471</width>
+                      <height>31</height>
+                     </rect>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">font-size: 22px;</string>
+                    </property>
+                    <property name="text">
+                     <string>Patient ID</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                   <widget class="QPushButton" name="loginButton">
+                    <property name="geometry">
+                     <rect>
+                      <x>100</x>
+                      <y>220</y>
+                      <width>201</width>
+                      <height>41</height>
+                     </rect>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: white;font-size:18px;</string>
+                    </property>
+                    <property name="text">
+                     <string>Login</string>
+                    </property>
+                   </widget>
+                   <widget class="QPushButton" name="toCreateButton">
+                    <property name="geometry">
+                     <rect>
+                      <x>100</x>
+                      <y>270</y>
+                      <width>201</width>
+                      <height>41</height>
+                     </rect>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: transparent;color: white;font-size:18px;</string>
+                    </property>
+                    <property name="text">
+                     <string>Create a patient</string>
+                    </property>
+                   </widget>
                   </widget>
                  </widget>
                 </widget>
@@ -1011,7 +1138,7 @@ QPushButton:hover {
 }</string>
                </property>
                <property name="text">
-                <string>Page 1</string>
+                <string>Tracker</string>
                </property>
               </widget>
              </item>
@@ -1034,7 +1161,7 @@ QPushButton:hover {
 }</string>
                </property>
                <property name="text">
-                <string>Page 2</string>
+                <string>Database</string>
                </property>
               </widget>
              </item>
@@ -1057,7 +1184,7 @@ QPushButton:hover {
 }</string>
                </property>
                <property name="text">
-                <string>Page 3</string>
+                <string>Settings</string>
                </property>
               </widget>
              </item>
